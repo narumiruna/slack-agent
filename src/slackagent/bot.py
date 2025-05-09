@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from typing import Any
+from typing import cast
 
 from agents import Agent
 from agents import ModelSettings
@@ -10,6 +11,7 @@ from agents import Runner
 from agents import TResponseInputItem
 from agents.mcp import MCPServer
 from agents.mcp import MCPServerStdio
+from agents.mcp import MCPServerStdioParams
 from loguru import logger
 from openai import AsyncOpenAI
 from slack_bolt.adapter.socket_mode.async_handler import AsyncSocketModeHandler
@@ -22,16 +24,16 @@ from .config import BotConfig
 
 class Bot:
     @classmethod
-    def from_conifg(cls, config: BotConfig) -> None:
-        mcp_servers = []
-        for name, parms in config.mcp_servers.items():
-            if parms.env is not None:
-                for k, v in parms.env.items():
-                    parms.env[k] = os.getenv(k, v)
+    def from_conifg(cls, config: BotConfig) -> Bot:
+        mcp_servers: list[MCPServer] = []
+        for name, params in config.mcp_servers.items():
+            if params.env is not None:
+                for k, v in params.env.items():
+                    params.env[k] = os.getenv(k, v)
 
             mcp_servers.append(
                 MCPServerStdio(
-                    params=parms.model_dump(),
+                    params=cast(MCPServerStdioParams, params.model_dump()),
                     name=name,
                     client_session_timeout_seconds=10.0,
                 )

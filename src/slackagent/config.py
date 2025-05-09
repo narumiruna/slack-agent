@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 
 class BotConfig(BaseModel):
-    mcp_servers: dict[str, StdioServerParameters] = []
+    mcp_servers: dict[str, StdioServerParameters] = {}
     client_session_timeout_seconds: float = 10.0
 
     @classmethod
