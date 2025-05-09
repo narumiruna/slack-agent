@@ -35,7 +35,7 @@ class Bot:
                 MCPServerStdio(
                     params=cast(MCPServerStdioParams, params.model_dump()),
                     name=name,
-                    client_session_timeout_seconds=10.0,
+                    client_session_timeout_seconds=config.client_session_timeout_seconds,
                 )
             )
         return cls(mcp_servers)
