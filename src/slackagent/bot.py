@@ -34,6 +34,7 @@ class Bot:
             mcp_servers.append(
                 MCPServerStdio(
                     params=cast(MCPServerStdioParams, params.model_dump()),
+                    cache_tools_list=config.cache_tools_list,
                     name=name,
                     client_session_timeout_seconds=config.client_session_timeout_seconds,
                 )

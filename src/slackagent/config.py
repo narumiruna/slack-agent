@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 class MCPServerConfig(BaseModel):
     mcp_servers: dict[str, StdioServerParameters] = {}
+    cache_tools_list: bool = False
     client_session_timeout_seconds: float = 10.0
 
     @classmethod

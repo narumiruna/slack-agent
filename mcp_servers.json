@@ -4,5 +4,7 @@
       "command": "uvx",
       "args": ["yfmcp@latest"]
     }
-  }
+  },
+  "cache_tools_list": false,
+  "client_session_timeout_seconds": 10.0
 }
