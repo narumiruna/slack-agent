@@ -7,12 +7,12 @@ from mcp import StdioServerParameters
 from pydantic import BaseModel
 
 
-class BotConfig(BaseModel):
+class MCPServerConfig(BaseModel):
     mcp_servers: dict[str, StdioServerParameters] = {}
     client_session_timeout_seconds: float = 10.0
 
     @classmethod
-    def from_json(cls, f: str | Path) -> BotConfig:
+    def from_json(cls, f: str | Path) -> MCPServerConfig:
         path = Path(f)
         if path.suffix != ".json":
             raise ValueError(f"File {path} is not a JSON file")

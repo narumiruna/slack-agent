@@ -19,12 +19,12 @@ from slack_bolt.async_app import AsyncApp
 from slack_bolt.context.say.async_say import AsyncSay
 from slack_sdk.web.async_client import AsyncWebClient
 
-from .config import BotConfig
+from .config import MCPServerConfig
 
 
 class Bot:
     @classmethod
-    def from_conifg(cls, config: BotConfig) -> Bot:
+    def from_conifg(cls, config: MCPServerConfig) -> Bot:
         mcp_servers: list[MCPServer] = []
         for name, params in config.mcp_servers.items():
             if params.env is not None:
@@ -87,7 +87,7 @@ class Bot:
         await say(result.final_output)
 
 
-async def init_slack_app(config: BotConfig) -> None:
+async def init_slack_app(config: MCPServerConfig) -> None:
     bot_token = os.getenv("SLACK_BOT_TOKEN")
     if not bot_token:
         raise ValueError("SLACK_BOT_TOKEN is not set")
