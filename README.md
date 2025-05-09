@@ -1,5 +1,7 @@
 # Slack Agent
 
+A simple Slack agent that uses OpenAI's API to respond to messages in a Slack channel.
+
 ## Usage
 
 ```shell
